@@ -113,6 +113,18 @@ class Instagram extends \Instagram\Core\BaseObjectAbstract {
         throw new \Instagram\Core\ApiException( 'username not found', 400, 'InvalidUsername' );
     }
 
+	/**
+	 * Get the user's media
+	 *
+	 * This can be paginated with the next_max_id param obtained from MediaCollection->getNext()
+	 *
+	 * @return\Instagram\Collection\MediaCollection
+	 * @access public
+	 */
+	public function getUserMedia( $user_id, array $params = null ) {
+		return new MediaCollection( $this->proxy->getUserMedia( $user_id, $params ), $this->proxy );
+	}
+
     /**
      * Check if a user is private
      *
